@@ -1,4 +1,5 @@
 import 'package:details/main.dart';
+import 'package:details/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -22,21 +23,37 @@ class contactUs extends StatefulWidget {
 }
 
 class _contactUsState extends State<contactUs> {
-  
- Widget aboutUs(
+  final _formKey = GlobalKey<FormState>();
+
+  dynamic _email;
+  dynamic _messages;
+
+  void _setEmail(String email) {
+    setState(() {
+      _email = email;
+    });
+  }
+
+  void _setMessage(String message) {
+    setState(() {
+      _messages = message;
+    });
+  }
+
+  Widget aboutUs(
           {required String image,
           required String title,
           required String subtitle}) =>
       Container(
-        margin: const EdgeInsets.all(10),
-        padding: const EdgeInsets.all(10),
+        margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
+        padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
         child: Center(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Container(
-                //padding: const EdgeInsets.only(left: 20),
+                //alignment: Alignment.center,
                 height: 100,
                 width: 100,
                 decoration: BoxDecoration(
@@ -75,8 +92,9 @@ class _contactUsState extends State<contactUs> {
           ),
         ),
       );
+      
 
-  Widget buildSocialButtons() => Card(
+  Widget buildSocialButtons({required String title}) => Card(
         margin: const EdgeInsets.all(30),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -115,7 +133,6 @@ class _contactUsState extends State<contactUs> {
 
     final url = urls[socialPlatform]!;
 
- 
     if (await canLaunch(url)) {
       await launch(url);
     }
@@ -124,34 +141,91 @@ class _contactUsState extends State<contactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
-      appBar: AppBar(
-        title: const Text('Contact Us'),
-        centerTitle: true,
-      ),
-      body: Container(
-        margin: const EdgeInsets.only(bottom: 50),
-        height: 500,
-        width: double.infinity,
-        decoration: const BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.only(
-              bottomLeft: Radius.circular(30),
-              bottomRight: Radius.circular(30),
-            )),
-        child: Column(
+        resizeToAvoidBottomInset: false,
+        appBar: AppBar(
+          title: const Text('Contact Us'),
+          centerTitle: true,
+        ),
+        body: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          //margin: const EdgeInsets.all(10),
           children: [
             aboutUs(
                 image: 'assets/logo.png',
-                title: 'WHO WE AREs',
+                title: 'WHO WE ARE',
                 subtitle:
-                    'Dyno Printing was built in 2022.\nWe serve printing services that can be ordered online.'),
+                    'Dyno Printing was built in 2022. We serve printing services that can be ordered online. User can also choose wheter they are want to pay transfer or COD'),
+            Form(
+              key: _formKey,
+              child: Container(
+                padding: const EdgeInsets.only(left: 20, right: 20),
+                child: Column(children: <Widget>[
+                  Padding(
+                    padding: const EdgeInsets.only(top: 5),
+                    child: SizedBox(
+                        height: 200,
+                        child: Column(
+                          children: [
+                            TextFormField(
+                              autofocus: true,
+                              decoration:
+                                  const InputDecoration(labelText: 'Email'),
+                              validator: (value) {
+                                if (value == null || value.isEmpty) {
+                                  return 'Please enter your Email';
+                                }
+                                return null;
+                              },
+                              onChanged: (text) {
+                                _setEmail(text);
+                              },
+                            ),
+                            const SizedBox(
+                              height: 10,
+                            ),
+                            TextFormField(
+                              autofocus: true,
+                              maxLines: 2,
+                              decoration: const InputDecoration(
+                                labelText: 'Other Details',
+                                border: OutlineInputBorder(),
+                              ),
+                              onChanged: (text) {
+                                _setMessage(text);
+                              },
+                            ),
+                            Container(
+                              margin: const EdgeInsets.all(5),
+                              width: double.infinity,
+                              height: 55,
+                              child: TextButton(
+                                onPressed: () => showDialog<String>(
+                                  context: context,
+                                  builder: (BuildContext context) =>
+                                      AlertDialog(
+                                    title: const Text('Thank You'),
+                                    content: const Text(
+                                        'Your message has been succesfully sent'),
+                                    actions: <Widget>[
+                                      ElevatedButton(
+                                        onPressed: () =>
+                                            Navigator.pop(context, 'OK'),
+                                        child: const Text('OK'),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                                child: const Text('Submit'),
+                              ),
+                            ),
+                          ],
+                        )),
+                  ),
+                ]),
+              ),
+            )
           ],
         ),
-      ),
-      bottomNavigationBar: buildSocialButtons(),
-    );
+        bottomNavigationBar: buildSocialButtons(title: 'Follow Us on Social Media'),
+        );
   }
 }
