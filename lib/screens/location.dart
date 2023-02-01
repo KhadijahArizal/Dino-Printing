@@ -1,8 +1,18 @@
-import 'package:details/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'main.dart';
+
+enum SocialMedia { maps }
+
+Future main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
+
+  runApp(const MyApp());
+}
 
 class location extends StatefulWidget {
   const location({Key? key}) : super(key: key);
@@ -32,6 +42,42 @@ class _LocationState extends State<location> {
         ),
       );
 
+  Widget storeLocation(
+          {required IconData icon, Color? color, required String title}) =>
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+              width: 20,
+              height: 20,
+              child: Center(
+                child: FaIcon(icon, color: color, size: 15),
+              )),
+          const SizedBox(
+            width: 5,
+          ),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      );
+
+  Future share(SocialMedia socialPlatform) async {
+    final urls = {
+      SocialMedia.maps: 'https://goo.gl/maps/FMvcrj8od7QqpdJF9',
+    };
+
+    final url = urls[socialPlatform]!;
+
+    if (await canLaunch(url)) {
+      await launch(url);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +87,8 @@ class _LocationState extends State<location> {
         centerTitle: true,
       ),
       body: Container(
-        margin: const EdgeInsets.only(bottom: 50),
-        height: 500,
+        margin: const EdgeInsets.only(bottom: 10),
+        height: 600,
         width: double.infinity,
         decoration: const BoxDecoration(
             color: Colors.white,
@@ -50,12 +96,69 @@ class _LocationState extends State<location> {
               bottomLeft: Radius.circular(30),
               bottomRight: Radius.circular(30),
             )),
-        child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-          title(text: 'Here is our location'),
-        ]),
+        child: GridView.count(
+          crossAxisCount: 1,
+          crossAxisSpacing: 1,
+          mainAxisSpacing: 1,
+          childAspectRatio: 1,
+          children: [
+            Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              const SizedBox(height: 25),
+              const Text('Dino Printing',
+                  style: TextStyle(
+                      fontSize: 20,
+                      color: Colors.black,
+                      /*letterSpacing: 1,*/
+                      fontWeight: FontWeight.w600)),
+              const Text('Print Shop',
+                  style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.black,
+                      fontWeight: FontWeight.w400)),
+              const SizedBox(height: 25),
+              storeLocation(
+                  icon: FontAwesomeIcons.mapLocation,
+                  color: Colors.black,
+                  title:
+                      'Universiti Islam Antarabangsa Malaysia Gombak, 53100, Selangor'),
+              storeLocation(
+                  icon: FontAwesomeIcons.mapPin,
+                  color: Colors.white,
+                  title:
+                      '7P2M+CH Ampang Jaya, Selangor'),
+              const SizedBox(height: 25),
+              Material(
+                color: Colors.indigo,
+                elevation: 8,
+                borderRadius: BorderRadius.circular(25),
+                clipBehavior: Clip.antiAliasWithSaveLayer,
+                child: InkWell(
+                  splashColor: Colors.black26,
+                  onTap: () => share(SocialMedia.maps),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Ink.image(
+                        image: const AssetImage('assets/dinoMap.jpeg'),
+                        height: 300,
+                        width: 450,
+                        fit: BoxFit.cover,
+                      ),
+                      const SizedBox(height: 6),
+                      const Text('Location',
+                          style: TextStyle(
+                            fontSize: 30,
+                            color: Colors.white,
+                          )),
+                      const SizedBox(height: 6)
+                    ],
+                  ),
+                ),
+              )
+            ]),
+          ],
+        ),
       ),
     );
   }
 }
-
-//belum siap lagi
