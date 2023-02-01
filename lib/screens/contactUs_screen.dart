@@ -1,5 +1,5 @@
-import 'package:dino_printing/main.dart';
-import 'package:dino_printing/router/routes.dart';
+import 'package:details/main.dart';
+import 'package:details/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -92,7 +92,6 @@ class _contactUsState extends State<contactUs> {
           ),
         ),
       );
-      
 
   Widget buildSocialButtons({required String title}) => Card(
         margin: const EdgeInsets.all(30),
@@ -141,91 +140,101 @@ class _contactUsState extends State<contactUs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        resizeToAvoidBottomInset: false,
-        appBar: AppBar(
-          title: const Text('Contact Us'),
-          centerTitle: true,
-        ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            aboutUs(
-                image: 'assets/logo.png',
-                title: 'WHO WE ARE',
-                subtitle:
-                    'Dyno Printing was built in 2022. We serve printing services that can be ordered online. User can also choose wheter they are want to pay transfer or COD'),
-            Form(
-              key: _formKey,
-              child: Container(
-                padding: const EdgeInsets.only(left: 20, right: 20),
-                child: Column(children: <Widget>[
-                  Padding(
-                    padding: const EdgeInsets.only(top: 5),
-                    child: SizedBox(
-                        height: 200,
-                        child: Column(
-                          children: [
-                            TextFormField(
-                              autofocus: true,
-                              decoration:
-                                  const InputDecoration(labelText: 'Email'),
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return 'Please enter your Email';
+      resizeToAvoidBottomInset: false,
+      appBar: AppBar(
+        title: const Text('Contact Us'),
+        centerTitle: true,
+      ),
+      body: Column(
+        children: [
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              aboutUs(
+                  image: 'assets/logo.png',
+                  title: 'WHO WE ARE',
+                  subtitle:
+                      'Dyno Printing was built in 2022. We serve printing services that can be ordered online. User can also choose wheter they are want to pay transfer or COD'),
+              Form(
+                key: _formKey,
+                child: Container(
+                  padding: const EdgeInsets.only(left: 20, right: 20),
+                  child: Column(children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.only(top: 5),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            autofocus: true,
+                            decoration:
+                                const InputDecoration(labelText: 'Email'),
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return 'Please enter your Email';
+                              }
+                              return null;
+                            },
+                            onChanged: (text) {
+                              _setEmail(text);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          TextFormField(
+                            autofocus: true,
+                            maxLines: 2,
+                            decoration: const InputDecoration(
+                              labelText: 'Other Details',
+                              border: OutlineInputBorder(),
+                            ),
+                            onChanged: (text) {
+                              _setMessage(text);
+                            },
+                          ),
+                          const SizedBox(
+                            height: 10,
+                          ),
+                          Container(
+                            margin: const EdgeInsets.all(5),
+                            width: double.infinity,
+                            height: 55,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                if (_formKey.currentState!.validate()) {
+                                  showDialog<String>(
+                                    context: context,
+                                    builder: (BuildContext context) =>
+                                        AlertDialog(
+                                      title: const Text('Thank You'),
+                                      content: const Text(
+                                          'Your message has been succesfully sent'),
+                                      actions: <Widget>[
+                                        ElevatedButton(
+                                          onPressed: () =>
+                                              Navigator.pop(context, 'OK'),
+                                          child: const Text('OK'),
+                                        ),
+                                      ],
+                                    ),
+                                  );
                                 }
-                                return null;
                               },
-                              onChanged: (text) {
-                                _setEmail(text);
-                              },
+                              child: const Text('Submit'),
                             ),
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            TextFormField(
-                              autofocus: true,
-                              maxLines: 2,
-                              decoration: const InputDecoration(
-                                labelText: 'Other Details',
-                                border: OutlineInputBorder(),
-                              ),
-                              onChanged: (text) {
-                                _setMessage(text);
-                              },
-                            ),
-                            Container(
-                              margin: const EdgeInsets.all(5),
-                              width: double.infinity,
-                              height: 55,
-                              child: TextButton(
-                                onPressed: () => showDialog<String>(
-                                  context: context,
-                                  builder: (BuildContext context) =>
-                                      AlertDialog(
-                                    title: const Text('Thank You'),
-                                    content: const Text(
-                                        'Your message has been succesfully sent'),
-                                    actions: <Widget>[
-                                      ElevatedButton(
-                                        onPressed: () =>
-                                            Navigator.pop(context, 'OK'),
-                                        child: const Text('OK'),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                                child: const Text('Submit'),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                ]),
-              ),
-            )
-          ],
-        ),
-        bottomNavigationBar: buildSocialButtons(title: 'Follow Us on Social Media'),
-        );
+                          )
+                        ],
+                      ),
+                    ),
+                  ]),
+                ),
+              )
+            ],
+          ),
+        ],
+      ),
+      bottomNavigationBar:
+          buildSocialButtons(title: 'Follow Us on Social Media'),
+    );
   }
 }
