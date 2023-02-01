@@ -1,9 +1,9 @@
-// ignore_for_file: unnecessary_const
+
 
 import 'package:dino_printing/screens/signin_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:dino_printing/screens/signin_screen.dart';
+
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
