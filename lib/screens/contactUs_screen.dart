@@ -94,10 +94,17 @@ class _contactUsState extends State<contactUs> {
       );
 
   Widget buildSocialButtons({required String title}) => Card(
-        margin: const EdgeInsets.all(30),
+        margin: const EdgeInsets.all(20),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 15,
+                color: Colors.black,
+              ),
+            ),
             buildSocialButton(
               icon: FontAwesomeIcons.squareFacebook,
               color: Colors.blue,
@@ -234,7 +241,7 @@ class _contactUsState extends State<contactUs> {
         ],
       ),
       bottomNavigationBar:
-          buildSocialButtons(title: 'Follow Us on Social Media'),
+          buildSocialButtons(title: 'Follow us on social media'),
     );
   }
 }
