@@ -79,6 +79,73 @@ Widget _UserDetails({
             ),
           ));
 
+  //--------------------------------
+  dynamic _name = '';
+  dynamic _email = '';
+  dynamic _phoneNo = '';
+  dynamic _quantity = '';
+  dynamic _color = 'Color';
+  dynamic _detail = '-';
+  dynamic _time = 'Time';
+  dynamic _deliver = 'Pickup/Delivery';
+  dynamic _payment = 'Payment';
+
+  size? _paperSize = size.A1;
+
+  void _setName(String name) {
+    setState(() {
+      _name = name;
+    });
+  }
+
+  void _setEmail(String email) {
+    setState(() {
+      _email = email;
+    });
+  }
+
+  void _SetPhoneNo(String phoneNo) {
+    setState(() {
+      _phoneNo = phoneNo;
+    });
+  }
+
+  void _setQuantity(String quantity) {
+    setState(() {
+      _quantity = quantity;
+    });
+  }
+
+  void _setColor(String color) {
+    setState(() {
+      _color = color;
+    });
+  }
+
+  void _setTime(String time) {
+    setState(() {
+      _time = time;
+    });
+  }
+
+  void _setDeliver(String deliver) {
+    setState(() {
+      _deliver = deliver;
+    });
+  }
+
+  void _setPayment(String payment) {
+    setState(() {
+      _payment = payment;
+    });
+  }
+
+  void setDetails(String detail) {
+    setState(() {
+      _detail = detail;
+    });
+  }
+  //--------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -163,8 +230,20 @@ body: Container(
                                 name: 'Location',
                               ),
                               _menu(
-                                onClicked: () => Navigator.pushNamed(
-                                    context, Routes.myOrder),
+                                onClicked: () => Navigator.pushNamed(context, Routes.userData,
+                                    arguments: User(
+                                        name:
+                                            _name, //firstNameController.text.toString(),
+                                        email:
+                                            _email, //lastNameController.text.toString()));
+                                        phoneNo: _phoneNo,
+                                        paperSize: _paperSize,
+                                        quantity: _quantity,
+                                        color: _color,
+                                        time: _time,
+                                        deliver: _deliver,
+                                        payment: _payment,
+                                        detail: _detail)),
                                 image: 'assets/myorder.png',
                                 name: 'My Order',
                               ),
