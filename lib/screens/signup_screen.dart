@@ -6,7 +6,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:dino_printing/reusable_widgets/reusable_widgets.dart';
 import 'package:dino_printing/screens/home_screen.dart';
-import 'package:dino_printing/screens/signin_screen.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   const SignUpScreen({Key? key}) : super(key: key);
@@ -17,9 +17,9 @@ class SignUpScreen extends StatefulWidget {
 }
 
 class _SignUpScreenState extends State<SignUpScreen> {
-TextEditingController _passwordTextController = TextEditingController();
-TextEditingController _emailTextController = TextEditingController();
-TextEditingController _userNameTextController = TextEditingController();
+final TextEditingController _passwordTextController = TextEditingController();
+final TextEditingController _emailTextController = TextEditingController();
+//TextEditingController _userNameTextController = TextEditingController();
   
   @override
   Widget build(BuildContext context) {
@@ -82,7 +82,7 @@ TextEditingController _userNameTextController = TextEditingController();
                 email: _emailTextController.text, 
                 password: _passwordTextController.text)
                 .then((value) {
-                  print("Created New Account");
+                  //print("Created New Account");
                   Navigator.push(context,
                   MaterialPageRoute(builder: (context) => const SignInScreen()));
                 }).onError((error, stackTrace) {
