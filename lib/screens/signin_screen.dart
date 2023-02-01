@@ -1,6 +1,4 @@
 
-
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -20,8 +18,8 @@ class SignInScreen extends StatefulWidget {
 
 class _SignInScreenState extends State<SignInScreen> {
 
-  TextEditingController _passwordTextController = TextEditingController();
-  TextEditingController _emailTextController = TextEditingController();
+  final TextEditingController _passwordTextController = TextEditingController();
+  final TextEditingController _emailTextController = TextEditingController();
  
   @override
   Widget build(BuildContext context) {
@@ -70,7 +68,7 @@ class _SignInScreenState extends State<SignInScreen> {
                 FirebaseAuth.instance.signInWithEmailAndPassword(email: _emailTextController.text, 
                 password: _passwordTextController.text).then((value) {
                 Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const UserProfile()));
+                MaterialPageRoute(builder: (context) => const HomeScreen()));
                 }).onError((error, stackTrace){
                   print("Error ${error.toString()}");
                 });
