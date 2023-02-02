@@ -1,23 +1,23 @@
 # Title: Dino-Printing
 ## Group Members:
 ### Nur Khadijah binti Arizal (2015546)
-### Fathanah Zahra (2019050)
+### Zahra Fathanah (2019050)
 
 ## **Introduction**
-> Dino Printing is a mobile application developed using Dart (programming language) and Flutter framework that provide printing order apps for the user to place their order for the use of printing service. 
+> Dino Printing is a mobile application developed using Dart (programming language) and Flutter framework that provide printing order apps for user to place their order online. 
 
 ## **Objective**
-> Create printing service for IIUM Community that is able to access 24/7 in an efficient way. 
+> Create printing service for IIUM Community that is able to be access online in an efficient way. 
 
 
 ## **Features & Functionality**
-- SignUp page
-- SignIn page
-- Order Form page
-- Payment Option page
-- Profile/Setting page
-- Location Page
-- Contact Us page
+- SignUp page: to register using email, password
+- SignIn page" to login using email and password
+- Order Form page: to place an order by fill in the form
+- Payment Option page: there are 2 payment options (COD and online transfer)
+- Profile/Setting page: contain user information and logout button
+- Location Page: contain the store location
+- Contact Us page: able the user to give feedback and contact us through social media
 
 ## **Routing(screen navigation) & Widgets(UI and reusable widgets)**
 1. SignIn page 
