@@ -279,7 +279,7 @@ class _orderFormState extends State<orderForm> {
                             width: double.infinity,
                             height: 55,
                             child: ElevatedButton(
-                              child: const Text('Order'),
+                              child: const Text('Next'),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   await orderform.add({
