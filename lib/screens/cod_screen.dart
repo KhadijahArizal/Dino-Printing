@@ -50,7 +50,7 @@ class _CodOptionState extends State<CodOption> {
               onPressed: () {
                 Navigator.pushNamed(context, Routes.homeScreen);
               },
-              child: const Text('My Order'),
+              child: const Text('Submit'),
             ),
           ],
         ),
