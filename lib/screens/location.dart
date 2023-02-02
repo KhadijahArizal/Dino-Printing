@@ -1,31 +1,25 @@
+import 'package:dino_printing/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'main.dart';
+import 'package:dino_printing/router/routes.dart';
 
-enum SocialMedia { maps }
+import 'contactUs_screen.dart';
 
-Future main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await SystemChrome.setPreferredOrientations(
-      [DeviceOrientation.portraitDown, DeviceOrientation.portraitUp]);
-
-  runApp(const MyApp());
-}
-
-class location extends StatefulWidget {
-  const location({Key? key}) : super(key: key);
+class Location extends StatefulWidget {
+  const Location({Key? key}) : super(key: key);
 
   @override
-  State<location> createState() => _LocationState();
+  State<Location> createState() => _LocationState();
 }
 
-class _LocationState extends State<location> {
+class _LocationState extends State<Location> {
   Widget title({required String text}) => Container(
         margin: const EdgeInsets.only(top: 10, left: 10, right: 10),
         padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
         child: Center(
+          child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.center,
@@ -40,36 +34,31 @@ class _LocationState extends State<location> {
             ],
           ),
         ),
-      );
+      ));
 
-  Widget storeLocation(
+ Widget storeLocation(
           {required IconData icon, Color? color, required String title}) =>
-      Container(
-          margin: const EdgeInsets.only(left: 10, right: 10),
-          padding: const EdgeInsets.only(left: 10, right: 10),
-          child: Center(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                    width: 20,
-                    height: 20,
-                    child: Center(
-                      child: FaIcon(icon, color: color, size: 15),
-                    )),
-                const SizedBox(
-                  width: 5,
-                ),
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 15,
-                    color: Colors.black,
-                  ),
-                ),
-              ],
+      Row(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+              width: 20,
+              height: 20,
+              child: Center(
+                child: FaIcon(icon, color: color, size: 15),
+              )),
+          const SizedBox(
+            width: 5,
+          ),
+          Text(
+            title,
+            style: const TextStyle(
+              fontSize: 15,
+              color: Colors.black,
             ),
-          ));
+          ),
+        ],
+      );
 
   Future share(SocialMedia socialPlatform) async {
     final urls = {
@@ -93,7 +82,7 @@ class _LocationState extends State<location> {
       ),
       body: Container(
         margin: const EdgeInsets.only(bottom: 10),
-        height: 600,
+        height: 700,
         width: double.infinity,
         decoration: const BoxDecoration(
             color: Colors.white,
@@ -115,21 +104,27 @@ class _LocationState extends State<location> {
                       color: Colors.black,
                       /*letterSpacing: 1,*/
                       fontWeight: FontWeight.w600)),
-              const Text('Print Shop',
+              const Text('Printing Shop',
                   style: TextStyle(
                       fontSize: 13,
                       color: Colors.black,
                       fontWeight: FontWeight.w400)),
-              const SizedBox(height: 25),
+              const SizedBox(height: 55),
               storeLocation(
                   icon: FontAwesomeIcons.mapLocation,
                   color: Colors.black,
                   title:
-                      'Universiti Islam Antarabangsa Malaysia Gombak, 53100, Selangor'),
+                      'Universiti Islam Antarabangsa Malaysia'),
+              storeLocation(
+                  icon: FontAwesomeIcons.mapLocation,
+                  color: Colors.black,
+                  title:
+                      'Gombak, 53100, Selangor'),
               storeLocation(
                   icon: FontAwesomeIcons.mapPin,
                   color: Colors.white,
-                  title: '7P2M+CH Ampang Jaya, Selangor'),
+                  title:
+                      '7P2M+CH Ampang Jaya, Selangor'),
               const SizedBox(height: 25),
               Material(
                 color: Colors.indigo,
@@ -144,25 +139,33 @@ class _LocationState extends State<location> {
                     children: [
                       Ink.image(
                         image: const AssetImage('assets/dinoMap.jpeg'),
-                        height: 300,
-                        width: 450,
+                        height: 120,
+                        width: 550,
                         fit: BoxFit.cover,
                       ),
                       const SizedBox(height: 6),
                       const Text('Location',
                           style: TextStyle(
-                            fontSize: 30,
+                            fontSize: 20,
                             color: Colors.white,
                           )),
-                      const SizedBox(height: 6)
+                      const SizedBox(height: 3)
                     ],
                   ),
                 ),
-              )
-            ]),
+              ),
+             
+              ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, Routes.homeScreen);
+                },
+                child: const Text('Back to Home'),
+         )
+          ]),
           ],
+          
         ),
       ),
     );
   }
-}
+  }
