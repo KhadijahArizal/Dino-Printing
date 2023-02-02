@@ -65,17 +65,15 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
-
-  # To add assets to your application, add an assets section, like this:
   assets:
-  - logo.png
-  - dino.png
-  - map.png
-  - contact.png
   - orderform.png
+  - map.png
+  - dino.png
   - myorder.png
+  - contact.png
+  - logo.png
+  - dinoMap.jpeg
   
-
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
 
