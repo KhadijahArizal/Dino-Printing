@@ -10,13 +10,13 @@ class OrderDetail extends StatefulWidget {
 }
 
 class _OrderDetailState extends State<OrderDetail > {
-  bool _showNotch = true;
+//   bool _showNotch = true;
 
-  void _onShowNotchChanged(bool value) {
-    setState(() {
-      _showNotch = value;
-    });
-  }
+//   void _onShowNotchChanged(bool value) {
+//     setState(() {
+//       _showNotch = value;
+//     });
+//   }
 
   @override
   Widget build(BuildContext context) {
