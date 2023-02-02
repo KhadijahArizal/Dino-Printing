@@ -7,7 +7,7 @@
 > Dino Printing is a mobile application developed using Dart (programming language) and Flutter framework that provide printing order apps for the user to place their order for the use of printing service. 
 
 ## **Objective**
-1. Create printing service for IIUM Community that is able to access 24/7 in an efficient way. 
+> Create printing service for IIUM Community that is able to access 24/7 in an efficient way. 
 
 
 ## **Features & Functionality**
