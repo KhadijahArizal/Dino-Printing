@@ -232,7 +232,7 @@ class _contactUsState extends State<contactUs> {
                                   ],
                                 ),
                               ),
-                              child: const Text('Submit'),
+                              child: const Text('Send'),
                             ),
                           ),
                         ],
