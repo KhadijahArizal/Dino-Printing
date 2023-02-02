@@ -21,19 +21,26 @@
 
 ## **Routing(screen navigation) & Widgets(UI and reusable widgets)**
 1. SignIn page 
+- Import reusable widgets file
 2. SignUp page (if the user yet to register or have account in Dino Printing)
+- Import reusable widgets file
 3. Home Screen 
-- Menu
+- 4 Menu options (Order form, Location, Contact Us, Profile)
 4. Order Form page
 - Form widget
-- Import reusable widgets file
-5. Order Details page
-6. Payment page 
+- Order button
+- Details confirmation
+- Edit button
+- Payment button
+5. Payment page 
 - COD page
-- Online Trnsfer page
+- Online transfer page
+6. Location page
+- Button image (InkWell)
 7. Contact Us page
-8. Location page
-9. Profile page
+- Feedback form widget
+- Send button
+8. Profile page
 - Logout button 
 
 ## **Sequence Diagram**
