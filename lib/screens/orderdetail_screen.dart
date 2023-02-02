@@ -77,12 +77,54 @@ class _OrderDetailState extends State<OrderDetail > {
                   child: const Text('Edit'),
                 )),
                 Container(
-              margin: const EdgeInsets.all(20),
+              margin: const EdgeInsets.only(left: 20, bottom: 20, right: 20),
               width: double.infinity,
               height: 55,
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, Routes.paymentOption);
+                  showDialog(
+                      context: context,
+                      builder: (context) => AlertDialog(
+                            shape: const RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(15))),
+                            title: const Text('Choose your payment',
+                                textAlign: TextAlign.center),
+                            actions: [
+                              Container(
+                                width: double.infinity,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.end,
+                                  children: [
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: const Size(100, 50),
+                                            primary: Colors.orange),
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, Routes.codOption);
+                                        },
+                                        child: const Text('COD')),
+                                    const SizedBox(
+                                      height: 10,
+                                    ),
+                                    ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                            minimumSize: const Size(100, 50),
+                                            primary: Colors.green,),
+                                        onPressed: () {
+                                          Navigator.pushNamed(
+                                              context, Routes.transferOption);
+                                        },
+                                        child: const Text('Online Transfer')),
+                                        const SizedBox(
+                                      height: 20,
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          ));
                 },
                 child: const Text('Proceed to Payment'),
               ),
