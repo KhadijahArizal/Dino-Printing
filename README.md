@@ -11,8 +11,9 @@
 
 
 ## **Features & Functionality**
-- SignUp & SignIn page
-- Order Form
+- SignUp page
+- SignIn page
+- Order Form page
 - Payment Option page
 - Profile/Setting page
 - Location Page
