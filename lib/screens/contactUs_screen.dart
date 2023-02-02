@@ -101,6 +101,13 @@ class _contactUsState extends State<contactUs> {
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Text(
+              title,
+              style: const TextStyle(
+                fontSize: 15,
+                color: Colors.black,
+              ),
+            ),
             buildSocialButton(
               icon: FontAwesomeIcons.squareFacebook,
               color: Colors.blue,
