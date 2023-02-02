@@ -44,27 +44,32 @@ class _LocationState extends State<location> {
 
   Widget storeLocation(
           {required IconData icon, Color? color, required String title}) =>
-      Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SizedBox(
-              width: 20,
-              height: 20,
-              child: Center(
-                child: FaIcon(icon, color: color, size: 15),
-              )),
-          const SizedBox(
-            width: 5,
-          ),
-          Text(
-            title,
-            style: const TextStyle(
-              fontSize: 15,
-              color: Colors.black,
+      Container(
+          margin: const EdgeInsets.only(left: 10, right: 10),
+          padding: const EdgeInsets.only(left: 10, right: 10),
+          child: Center(
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                    width: 20,
+                    height: 20,
+                    child: Center(
+                      child: FaIcon(icon, color: color, size: 15),
+                    )),
+                const SizedBox(
+                  width: 5,
+                ),
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 15,
+                    color: Colors.black,
+                  ),
+                ),
+              ],
             ),
-          ),
-        ],
-      );
+          ));
 
   Future share(SocialMedia socialPlatform) async {
     final urls = {
@@ -124,8 +129,7 @@ class _LocationState extends State<location> {
               storeLocation(
                   icon: FontAwesomeIcons.mapPin,
                   color: Colors.white,
-                  title:
-                      '7P2M+CH Ampang Jaya, Selangor'),
+                  title: '7P2M+CH Ampang Jaya, Selangor'),
               const SizedBox(height: 25),
               Material(
                 color: Colors.indigo,
