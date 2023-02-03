@@ -20,6 +20,7 @@
 - Contact Us page: able the user to give feedback and contact us through social media
 
 ## **Routing(screen navigation) & Widgets(UI and reusable widgets)**
+[Screen Navigation](https://pdf.ac/1rCHVB)
 1. SignIn page 
 - Import reusable widgets file
 2. SignUp page (if the user yet to register or have account in Dino Printing)
