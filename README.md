@@ -52,4 +52,12 @@
 - https://www.youtube.com/watch?v=GvIoBgmNgQw
 - https://www.youtube.com/watch?v=1_xKjeQXa3A
 - https://api.flutter.dev/flutter/material/Card-class.html
+- https://youtu.be/eGUySSXUxjY
+- https://youtu.be/1_xKjeQXa3A
+- https://youtu.be/bWehAFTFc9o
+- https://youtu.be/-aFqImmwE9s
+- https://youtu.be/3x92z0oHbtY
+- https://youtu.be/OqFZ0fCS46U
+- https://youtu.be/43m9GvHhO3k
+- https://api.flutter.dev/flutter/widgets/Form-class.html
 
