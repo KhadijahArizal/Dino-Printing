@@ -20,7 +20,6 @@
 - Contact Us page: able the user to give feedback and contact us through social media
 
 ## **Routing(screen navigation) & Widgets(UI and reusable widgets)**
-[Screen Navigation](shorturl.at/gnyz3)
 1. SignIn page 
 - Import reusable widgets file
 2. SignUp page (if the user yet to register or have account in Dino Printing)
