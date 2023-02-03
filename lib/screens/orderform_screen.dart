@@ -1,7 +1,11 @@
+
+import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dino_printing/screens/order.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:dino_printing/router/routes.dart';
+import 'package:file_picker/file_picker.dart';
 // import 'package:dino_printing/screens/orderdetail_screen.dart';
 // import 'package:dino_printing/screens/order.dart';
 
@@ -64,6 +68,70 @@ class _orderFormState extends State<orderForm> {
 
   CollectionReference orderform =
       FirebaseFirestore.instance.collection('orderform');
+
+       Widget buildProgress() => StreamBuilder<TaskSnapshot>(
+      stream: uploadTask?.snapshotEvents,
+      builder: ((context, snapshot) {
+        if (snapshot.hasData) {
+          final data = snapshot.data!;
+          double progress = data.bytesTransferred / data.totalBytes;
+
+          return SizedBox(
+              height: 50,
+              child: Stack(
+                fit: StackFit.expand,
+                children: [
+                  LinearProgressIndicator(
+                    value: progress,
+                    backgroundColor: Colors.grey,
+                    color: Colors.green,
+                  ),
+                  Center(
+                    child: Text(
+                      '${(100 * progress).roundToDouble()}%',
+                      style: const TextStyle(color: Colors.white),
+                    ),
+                  )
+                ],
+              ));
+        } else {
+          return const SizedBox(
+            height: 20,
+          );
+        }
+      }));
+
+  PlatformFile? pickedFile;
+  UploadTask? uploadTask;
+  File? file;
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+    if (result == null) return;
+    final path = result.files.first;
+
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
+
+  Future uploadFile() async {
+    final path = 'printDino/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+    setState(() {
+      uploadTask = ref.putFile(file);
+    });
+    final snapshot = await uploadTask!.whenComplete(() {});
+
+    final urlDownload = await snapshot.ref.getDownloadURL();
+    print('Donwload link: $urlDownload');
+
+    setState(() {
+      uploadTask = null;
+    });
+  }
   late String name;
   late String phone;
   late String mahallah;
@@ -274,12 +342,44 @@ class _orderFormState extends State<orderForm> {
                               );
                             }).toList(),
                           ),
+                                      Row(
+                            children: [
+                              const Text('Upload File:',
+                                  style: TextStyle(
+                                      fontSize: 15, color: Colors.black)),
+                              if (pickedFile != null)
+                                Expanded(
+                                    child: Container(
+                                        child: Center(
+                                            child: Text(pickedFile!.name)))),
+                              const SizedBox(
+                                width: 15,
+                              ),
+                              ElevatedButton(
+                                  onPressed: selectFile,
+                                  child: const Text('Select File')),
+                              const SizedBox(width: 15),
+                              OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    side: const BorderSide(
+                                        color: Colors.indigo, width: 2),
+                                  ),
+                                  onPressed: uploadFile,
+                                  child: const Text('Upload File')),
+                              const SizedBox(width: 15),
+                              buildProgress(),
+                            ],
+                          ),
+                          const Text("please press 'Upload File' button after select the file",
+                                  style: TextStyle(
+                                      fontSize: 13, color: Colors.red,
+                                      fontWeight: FontWeight.w400)),
                           Container(
                             margin: const EdgeInsets.all(5),
                             width: double.infinity,
                             height: 55,
                             child: ElevatedButton(
-                              child: const Text('Next'),
+                              child: const Text('Order'),
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   await orderform.add({
