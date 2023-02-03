@@ -9,6 +9,25 @@
 ## **Objective**
 > Create printing service for IIUM Community that is able to be access online in an efficient way. 
 
+## **Task Distribution**
+> Khadijah
+- SignIn page
+- SignUp page 
+- Order Form (number of copies, color, time)
+- Setting page
+- Payment page
+- Set user signIn and signOut authentication 
+- Fix the infinite layout size error page
+- Compile all the code
+
+> Zahra
+- Home page
+- Order Form (name, phone no, mahallah, size)
+- My Order(display order details confirmation)
+- Location page
+- Contact Us page
+- Set Firestore database storage (order form and contact us)
+- Tidying up payments page
 
 ## **Features & Functionality**
 - SignUp page: to register using email, password
