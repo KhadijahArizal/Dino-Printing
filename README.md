@@ -52,5 +52,4 @@
 - https://www.youtube.com/watch?v=GvIoBgmNgQw
 - https://www.youtube.com/watch?v=1_xKjeQXa3A
 - https://api.flutter.dev/flutter/material/Card-class.html
-- 
 
