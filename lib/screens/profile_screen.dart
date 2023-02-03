@@ -1,6 +1,7 @@
 import 'package:dino_printing/screens/signin_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:dino_printing/main.dart';
 
 class UserProfile extends StatefulWidget {
   const UserProfile({Key? key}) : super(key: key);
@@ -21,74 +22,81 @@ class _ProfileState extends State<UserProfile> {
           child: Text('User Profile'),
         ),
       ),
-      body: ListView(
-        children: <Widget>[
-          Container(
-            height: 250,
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.indigo, Colors.indigo.shade300],
-                begin: Alignment.centerLeft,
-                end: Alignment.centerRight,
-                stops: const [0.5, 0.9],
+      body: Container(
+        color: Colors.indigo,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            const CircleAvatar(
+              radius: 50.0,
+              backgroundImage: NetworkImage(
+                  'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFiYml0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60'),
+            ),
+            Text(
+              user.email!,
+              style: const TextStyle(
+                fontFamily: 'Pacifico',
+                fontSize: 30.0,
+                color: Colors.white,
               ),
             ),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: const <Widget>[
-                    CircleAvatar(
-                      backgroundColor: Colors.white70,
-                      minRadius: 60.0,
-                      child: CircleAvatar(
-                        radius: 50.0,
-                        backgroundImage: NetworkImage(
-                            'https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8M3x8cmFiYml0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=600&q=60'),
-                      ),
-                    ),
-                  ],
+            Divider(),
+            const Text(
+              'USER DINO PRINTING',
+              style: TextStyle(
+                fontFamily: 'Source Sans Pro',
+                fontSize: 15.0,
+                letterSpacing: 2.5,
+                fontWeight: FontWeight.bold,
+                color: Colors.white,
+              ),
+            ),
+            SizedBox(
+              height: 20.0,
+              width: 150.0,
+              child: Divider(
+                color: Colors.indigo.shade300,
+              ),
+            ),
+            Card(
+              margin: const EdgeInsets.symmetric(
+                vertical: 20.0,
+                horizontal: 45.0,
+              ),
+              color: Colors.white,
+              child: ListTile(
+                leading: Icon(
+                  Icons.email,
+                  size: 24.0,
+                  color: Colors.indigo.shade800,
                 ),
-                const SizedBox(
-                  height: 10,
-                ),
-                Text(
+                title: Text(
                   user.email!,
-                  // 'Khadijah Arizal',
-                  style: const TextStyle(
-                    fontSize: 35,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                  ),
-                ),
-                const Text(
-                  'Dino Printing User',
                   style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 25,
+                    color: Colors.indigo.shade800,
+                    fontSize: 20.0,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
-              ],
+              ),
             ),
-          ),
-          ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.purpleAccent, // Background color
-            ),
-            child: const Text("Logout"),
-            onPressed: () {
-              FirebaseAuth.instance.signOut().then((value) {
-                print("Signed Out");
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SignInScreen()));
-              });
-            },
-          ),
-        ],
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.purpleAccent,
+                    fixedSize: const Size(140, 65),
+                    shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(50))),
+                child: const Text("Logout"),
+                onPressed: () {
+                  FirebaseAuth.instance.signOut().then((value) {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SignInScreen()));
+                  });
+                })
+          ],
+        ),
       ),
     );
   }
