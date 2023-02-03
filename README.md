@@ -12,7 +12,7 @@
 
 ## **Features & Functionality**
 - SignUp page: to register using email, password
-- SignIn page" to login using email and password
+- SignIn page: to login using email and password
 - Order Form page: to place an order by fill in the form
 - Payment Option page: there are 2 payment options (COD and online transfer)
 - Profile/Setting page: contain user information and logout button
